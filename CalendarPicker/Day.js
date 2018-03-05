@@ -21,9 +21,9 @@ export default function Day(props) {
     textStyle,
     minDate,
     maxDate,
+	disabledDates,
   } = props;
-
-  const thisDay = moment(`${year}/${month + 1}/${day}`, 'jYYYY/jM/jD');;
+  const thisDay = moment(`${year}/${month + 1}/${day}`, 'jYYYY/jM/jD');
   const today = moment();
   //today.setHours(0,0,0,0);
 
@@ -44,7 +44,13 @@ export default function Day(props) {
       dateOutOfRange = true;
     }
   }
-
+  
+  if (disabledDates && Array.isArray(disabledDates)) {
+	   if (disabledDates.indexOf(thisDay.toDate().getTime()) >= 0) {
+		   dateOutOfRange = true;
+		}
+	}
+	
   // If date is not out of range let's apply styles
   if (!dateOutOfRange) {
     // set today's style
@@ -124,4 +130,5 @@ Day.propTypes = {
   styles: PropTypes.shape({}),
   day: PropTypes.number,
   onPressDay: PropTypes.func,
+  disabledDates: PropTypes.array
 }

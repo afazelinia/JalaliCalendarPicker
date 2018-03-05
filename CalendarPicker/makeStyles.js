@@ -70,7 +70,8 @@ export function makeStyles(scaler, backgroundColor, textColor, todayBackgroundCo
       width: 30*scaler,
       height:30*scaler,
       backgroundColor: SELECTED_BG_COLOR,
-      borderRadius: 30*scaler,
+	  borderColor: '#00A39E',
+	  borderWidth: 1,
       marginTop: -10*scaler,
       alignSelf: 'center'
     },

@@ -45,6 +45,13 @@ export default class CalendarPicker extends Component {
   }
 
   componentWillMount() {
+	const { disabledDates } = this.props;
+	  if (disabledDates && Array.isArray(disabledDates)) {
+      disabledDates.map(function(date, index, disabledDates){
+        date.setHours(0,0,0,0);
+        disabledDates[index] = date.getTime();
+      });
+    }
     this.setState({...this.updateScaledStyles(this.props), ...this.updateMonthYear(this.props)});
   }
 
@@ -188,6 +195,7 @@ export default class CalendarPicker extends Component {
       previousTitle,
       nextTitle,
       textStyle,
+	  disabledDates,
     } = this.props;
 
     return (
@@ -225,6 +233,7 @@ export default class CalendarPicker extends Component {
             selectedEndDate={selectedEndDate}
             minDate={minDate && minDate.setHours(0,0,0,0)}
             maxDate={maxDate && maxDate.setHours(0,0,0,0)}
+			disabledDates={disabledDates}
             textStyle={textStyle}
           />
         </View>
